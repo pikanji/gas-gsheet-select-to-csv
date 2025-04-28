@@ -7,6 +7,7 @@ A Google Apps Script that allows you to download selected columns from your Goog
 - Download selected columns as a CSV file
 - Column is considered selected if any cell in the column is selected
 - Multiple columns can be selected at once
+- Support for non-contiguous selections (multiple separate cell selections)
 - Empty rows are automatically removed from the CSV output
 - Direct download link provided when CSV is ready
 - Double quotes in cells are properly escaped according to CSV standards
@@ -23,6 +24,7 @@ A Google Apps Script that allows you to download selected columns from your Goog
 ## Usage
 
 1. Select one or more cells in the columns you want to export
+   - You can select multiple areas by holding Ctrl (or Cmd on Mac) while selecting
 2. Click on the "CSV Tools" menu that appears in your Google Sheet toolbar
 3. Select "Download Selected Columns as CSV"
 4. If no cells are selected, you'll be prompted to select cells

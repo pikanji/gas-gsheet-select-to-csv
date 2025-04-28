@@ -15,16 +15,18 @@ function downloadSelectedColumnsAsCSV() {
   const ui = SpreadsheetApp.getUi();
   const activeSheet = SpreadsheetApp.getActiveSheet();
   const selection = SpreadsheetApp.getSelection();
-  const activeRange = selection.getActiveRange();
+  
+  // Get all selected ranges
+  const rangeList = selection.getActiveRangeList();
   
   // Check if any cells are selected
-  if (!activeRange) {
+  if (!rangeList || rangeList.getRanges().length === 0) {
     ui.alert('No Selection', 'Please select cells to specify columns to download.', ui.ButtonSet.OK);
     return;
   }
   
-  // Get the columns that are selected
-  const selectedColumns = getSelectedColumns(activeRange);
+  // Get the columns that are selected from all ranges
+  const selectedColumns = getSelectedColumnsFromRanges(rangeList.getRanges());
   
   if (selectedColumns.length === 0) {
     ui.alert('No Columns Selected', 'No columns were identified from your selection.', ui.ButtonSet.OK);
@@ -45,22 +47,28 @@ function downloadSelectedColumnsAsCSV() {
 }
 
 /**
- * Get column indices that are selected.
+ * Get column indices that are selected from multiple ranges.
  * 
- * @param {Range} activeRange - The active range that's selected.
- * @return {number[]} Array of column indices that are selected.
+ * @param {Range[]} ranges - Array of selected ranges.
+ * @return {number[]} Array of unique column indices that are selected.
  */
-function getSelectedColumns(activeRange) {
-  const startColumn = activeRange.getColumn();
-  const numColumns = activeRange.getNumColumns();
+function getSelectedColumnsFromRanges(ranges) {
+  // Use a Set to automatically deduplicate column indices
+  const selectedColumnsSet = new Set();
   
-  // Create array of selected column indices
-  const selectedColumns = [];
-  for (let i = 0; i < numColumns; i++) {
-    selectedColumns.push(startColumn + i - 1); // Converting to 0-indexed
-  }
+  // Process each range
+  ranges.forEach(range => {
+    const startColumn = range.getColumn();
+    const numColumns = range.getNumColumns();
+    
+    // Add all columns in this range to the set
+    for (let i = 0; i < numColumns; i++) {
+      selectedColumnsSet.add(startColumn + i - 1); // Converting to 0-indexed
+    }
+  });
   
-  return selectedColumns;
+  // Convert the Set back to an Array and sort it
+  return Array.from(selectedColumnsSet).sort((a, b) => a - b);
 }
 
 /**

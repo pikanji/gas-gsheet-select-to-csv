@@ -8,6 +8,7 @@ License: MIT
 
 ## Features
 - Consider a column as selected, if the user has selected any of the cell in the column. Multiple columns can be considered as selected at the same time.
+- Allow the user to select not only 1 range but also multiple cells apart.
 - If no cell is selected, prompt user to select cells to specify columns to download.
 - Create CSV data of the selected columns.
 - Remove any emply rows.

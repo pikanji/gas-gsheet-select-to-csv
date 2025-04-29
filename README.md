@@ -1,4 +1,4 @@
-# Google Sheet Select to CSV
+# Google Sheet to Anki Import
 
 A Google Apps Script that allows you to download all or selected columns from your Google Sheet as a CSV file for Anki import.
 

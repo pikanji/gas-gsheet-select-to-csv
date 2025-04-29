@@ -40,7 +40,10 @@ function downloadSelectedColumnsAsCSV() {
   const csvData = extractSelectedColumnsData(data, selectedColumns);
   
   // Convert to CSV
-  const csvContent = convertToCSV(csvData);
+  let csvContent = convertToCSV(csvData);
+
+  // Add the Anki import file header, and make the first row mapping to the Anki fields.
+  csvContent = "#separator:Comma\n#columns:" + csvContent;
   
   // Create the file and show download dialog
   createAndDownloadCSV(csvContent, activeSheet.getName());

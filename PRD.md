@@ -1,7 +1,7 @@
 # Product Requirement Document
 
 ## Overview
-Google Spreadsheet AppScript that let the user download selected columns as CSV file.
+Google Spreadsheet AppScript that let the user download selected columns as Anki import file.
 
 Application Type: AppScript in Google Spreadsheet
 License: MIT
@@ -14,3 +14,4 @@ License: MIT
 - Remove any emply rows.
 - Let the user download the CSV file automatically after the data is ready.
 - If the cell contains double quoation, escape it.
+- Use the values in the first row to map the column to the fields of Anki cards.

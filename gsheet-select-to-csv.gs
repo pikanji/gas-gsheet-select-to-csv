@@ -4,8 +4,33 @@
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('CSV Tools')
+    .addItem('Download All Data as CSV', 'downloadAllDataAsCSV')
     .addItem('Download Selected Columns as CSV', 'downloadSelectedColumnsAsCSV')
     .addToUi();
+}
+
+/**
+ * Function to download all data from the current sheet as CSV.
+ */
+function downloadAllDataAsCSV() {
+  const activeSheet = SpreadsheetApp.getActiveSheet();
+  
+  // Get all data from the sheet
+  const data = activeSheet.getDataRange().getValues();
+  
+  // Remove empty rows
+  const nonEmptyData = data.filter(row => 
+    row.some(cell => cell !== null && cell !== '')
+  );
+  
+  // Convert to CSV
+  let csvContent = convertToCSV(nonEmptyData);
+
+  // Add the Anki import file header
+  csvContent = "#separator:Comma\n#columns:" + csvContent;
+  
+  // Create the file and show download dialog
+  createAndDownloadCSV(csvContent, activeSheet.getName());
 }
 
 /**

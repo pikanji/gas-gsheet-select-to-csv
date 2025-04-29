@@ -1,16 +1,18 @@
 # Google Sheet Select to CSV
 
-A Google Apps Script that allows you to download selected columns from your Google Sheet as a CSV file.
+A Google Apps Script that allows you to download all or selected columns from your Google Sheet as a CSV file for Anki import.
 
 ## Features
 
-- Download selected columns as a CSV file
+- Download all or selected columns as an Anki-compatible CSV file
 - Column is considered selected if any cell in the column is selected
 - Multiple columns can be selected at once
 - Support for non-contiguous selections (multiple separate cell selections)
 - Empty rows are automatically removed from the CSV output
 - Direct download link provided when CSV is ready
 - Double quotes in cells are properly escaped according to CSV standards
+- First row values are used to map columns to Anki card fields
+- CSV output includes Anki import file header with comma separator
 
 ## Installation
 
@@ -30,6 +32,7 @@ A Google Apps Script that allows you to download selected columns from your Goog
 4. If no cells are selected, you'll be prompted to select cells
 5. Once the CSV is created, a dialog will appear with a download link
 6. Click the link to download your CSV file
+7. Import the CSV file into Anki using the comma separator
 
 ## License
 
